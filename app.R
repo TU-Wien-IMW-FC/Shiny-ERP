@@ -16,10 +16,9 @@ library(diagram)
 library(DiagrammeR)
 library(DT)
 
-
-
 server <- function(input, output, session) {
   source('modules/1000//server.R', local = environment())$value
+  source('modules/_procurement_incoming_goods//server.R', local = environment())$value
 }
 
 ui <- dashboardPage(
@@ -34,7 +33,7 @@ ui <- dashboardPage(
       # Finance
       menuItem(
         "Finance",
-        tabName = "tab_finane",
+        tabName = "tab_finance",
         icon = icon("line-chart"),
         menuItem(
           "REA Transactions",
@@ -43,7 +42,7 @@ ui <- dashboardPage(
         ),
         menuItem(
           "ALE Accounting",
-          tabName = 'tab_aleacclunting',
+          tabName = 'tab_aleaccounting',
           icon = icon('balance-scale')
         )
       ),
@@ -56,8 +55,8 @@ ui <- dashboardPage(
           "Procurement",
           tabName = 'tab_procurement',
           icon = icon('shopping-basket'),
-          menuSubItem('Incoming Goods', tabName = 'tab_procurement_incoming_goods'),
-          menuSubItem('Receipt Incoming Goods', tabName = 'tab_procurement_receipt_incoming_goods')
+          menuSubItem('Incoming Goods (PZU)', tabName = 'tab_procurement_incoming_goods'),
+          menuSubItem('Receipt Incoming Goods (ER)', tabName = 'tab_procurement_receipt_incoming_goods')
         ),
         menuItem(
           "Manufacturing",
@@ -105,7 +104,8 @@ ui <- dashboardPage(
   
   dashboardBody(tabItems(
     source('modules/_home/ui.R', local = environment())$value,
-    source('modules/1000//ui.R', local = environment())$value
+    source('modules/1000//ui.R', local = environment())$value,
+    source('modules/_procurement_incoming_goods//ui.R', local = environment())$value
   ))
   
   )
